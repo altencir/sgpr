@@ -78,8 +78,10 @@ producers/
 ```bash
 git clone https://github.com/altencir/sgpr.git
 cd rural-producer-management
+```
 2. Configuração com Docker (Recomendado)
-bash# Subir todos os serviços
+```bash 
+# Subir todos os serviços
 docker-compose up -d
 
 # Verificar logs
@@ -87,9 +89,11 @@ docker-compose logs -f
 
 # Parar serviços
 docker-compose down
+```
 3. Configuração Manual
 Backend (FastAPI)
-bash# Instalar dependências
+```bash
+# Instalar dependências
 pip install -r requirements.txt
 
 # Configurar banco
@@ -100,8 +104,10 @@ alembic upgrade head
 
 # Iniciar servidor
 uvicorn app.main:app --reload --port 8000
+```
 Frontend (Django)
-bashcd django_frontend
+```bash
+cd django_frontend
 
 # Instalar dependências
 pip install -r requirements.txt
@@ -130,10 +136,11 @@ Dashboard: http://localhost:8001/
 Produtores: http://localhost:8001/producers/
 Fazendas: http://localhost:8001/farms/
 Admin: http://localhost:8001/admin/
-
+```
 🧪 Testes
 Executar Testes FastAPI
-bash# Todos os testes
+```bash
+# Todos os testes
 pytest tests/ -v
 
 # Testes com coverage
@@ -142,8 +149,10 @@ pytest tests/ --cov=app --cov-report=html
 # Testes específicos
 pytest tests/unit/test_validators.py -v
 pytest tests/integration/test_api.py -v
+```
 Executar Testes Django
-bashcd django_frontend
+```bash
+cd django_frontend
 
 # Todos os testes
 python manage.py test
@@ -229,17 +238,20 @@ Acesse a documentação interativa em:
 Swagger UI: http://localhost:8000/docs
 ReDoc: http://localhost:8000/redoc
 OpenAPI JSON: http://localhost:8000/openapi.json
-
-Exemplos de Uso
+```
+# Exemplos de Uso
 Criar Produtor
-bashcurl -X POST "http://localhost:8000/producers/" \
+```bash
+curl -X POST "http://localhost:8000/producers/" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "João Silva",
     "cpf_cnpj": "111.444.777-35"
   }'
+```
 Criar Fazenda
-bashcurl -X POST "http://localhost:8000/farms/" \
+```bash
+curl -X POST "http://localhost:8000/farms/" \
   -H "Content-Type: application/json" \
   -d '{
     "producer_id": "uuid-here",
@@ -250,22 +262,28 @@ bashcurl -X POST "http://localhost:8000/farms/" \
     "arable_area": 800.00,
     "vegetation_area": 200.00
   }'
+```
 🐛 Troubleshooting
 Problemas Comuns
 Erro de Conexão com Banco
-bash# Verificar se PostgreSQL está rodando
+```bash
+# Verificar se PostgreSQL está rodando
 docker-compose ps
 
 # Verificar logs do banco
 docker-compose logs db
+```
 Cache Redis Não Funcionando
-bash# Verificar conexão Redis
+```bash
+# Verificar conexão Redis
 docker-compose exec redis redis-cli ping
 
 # Limpar cache
 docker-compose exec redis redis-cli FLUSHALL
+```
 Problemas com Migrations
-bash# Reset migrations Django
+```bash
+# Reset migrations Django
 python manage.py migrate --run-syncdb
 
 # Reset migrations FastAPI
@@ -605,7 +623,7 @@ Microservices: Service decomposition
 Message Queues: Async processing
 CDN: Static file distribution
 
-
+```
 ### Scripts de Automação
 
 #### scripts/setup.sh
@@ -708,9 +726,10 @@ echo "  docker-compose logs -f          # Ver logs"
 echo "  docker-compose down             # Parar serviços"
 echo "  docker-compose exec api bash    # Acessar container API"
 echo "  docker-compose exec frontend bash # Acessar container Frontend"
-
+```
 scripts/test.sh
-bash#!/bin/bash
+```bash
+#!/bin/bash
 
 # 🧪 Script de Testes Completos
 set -e
@@ -839,8 +858,10 @@ echo ""
 echo "📁 Relatórios gerados em:"
 echo "  FastAPI: htmlcov/index.html"
 echo "  Django: django_frontend/htmlcov/index.html"
+```
 scripts/deploy.sh
-bash#!/bin/bash
+```bash
+#!/bin/bash
 
 # 🚀 Script de Deploy para Produção
 set -e
@@ -895,3 +916,4 @@ if curl -s http://localhost:8000/health | grep -q "healthy" &&
    curl -s http://localhost:8001 | grep -q "Dashboard"; then
     echo "✅ Deploy bem-### Testes FastAPI (Completos)
 
+```
