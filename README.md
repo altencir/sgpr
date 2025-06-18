@@ -27,6 +27,7 @@ Sistema completo para gerenciamento de produtores rurais, fazendas e culturas, d
 ## 🏗️ Arquitetura
 
 ### Backend (FastAPI)
+```
 app/
 ├── models/          # SQLAlchemy models
 ├── repositories/    # Data access layer
@@ -43,7 +44,7 @@ producers/
 ├── services.py     # Business services
 ├── managers.py     # Custom query managers
 └── templates/      # HTML templates
-
+```
 ## 🛠️ Tecnologias
 
 ### Backend
