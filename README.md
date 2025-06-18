@@ -35,8 +35,9 @@ app/
 ├── controllers/     # API endpoints
 ├── schemas/         # Pydantic schemas
 └── utils/          # Validators, logger
-
+```
 ### Frontend (Django)
+```
 producers/
 ├── models.py       # Django models
 ├── views.py        # Class-based views
