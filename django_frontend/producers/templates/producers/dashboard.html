@@ -1,0 +1,95 @@
+{% extends 'producers/base.html' %}
+{% load static %}
+
+{% block title %}Dashboard - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h1 class="display-6">📊 Dashboard</h1>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total de Fazendas</h5>
+                <h2 class="card-text">{{ total_farms }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total de Produtores</h5>
+                <h2 class="card-text">{{ total_producers }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total de Hectares</h5>
+                <h2 class="card-text">{{ total_hectares|floatformat:2 }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-warning text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total de Culturas</h5>
+                <h2 class="card-text">{{ total_cultures }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Distribuição por Estado</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="stateChart" width="300" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Culturas Plantadas</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="cultureChart" width="300" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Uso do Solo</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="landUseChart" width="300" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Carrega dados dos gráficos
+    fetch('/dashboard/data/')
+        .then(response => response.json())
+        .then(data => {
+            createStateChart(data.states);
+            createCultureChart(data.cultures);
+            createLandUseChart(data.land_use);
+        });
+</script>
+{% endblock %}
